@@ -1,6 +1,8 @@
-#` for given gene retrieve top rows corresponding to (number of rows specified by numbertoget) after sorting by any numerical score in rankcol
-#` libdf can be any data frame (each row is a sgRNA protospacer sequence) that contains columns specified by the other input arguments
-#` returns dataframe with additional pickrank column to indicate rank after sorting by rankcol
+#' for given gene retrieve top rows corresponding to (number of rows specified by numbertoget) after sorting by any numerical score in rankcol
+#' libdf can be any data frame (each row is a sgRNA protospacer sequence) that contains columns specified by the other input arguments
+#'@export
+#'@return dataframe with picked rows with additional pickrank column to indicate rank after sorting by rankcol
+
 getSpacersForGeneByRank <- function( gene,
                                      libdf,
                                      numbertoget,
