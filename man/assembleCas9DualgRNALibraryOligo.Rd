@@ -17,6 +17,9 @@ assembleCas9DualgRNALibraryOligo(
   Adapter3p
 )
 }
+\value{
+character containing assembled oligo sequence
+}
 \description{
 Function to facilitate assembly of oligo pool synthesis for Cas9 dual gRNA expression as in Replogle et al 2020
 BsmBIstuffer defaults to sequence for containing BsmBI sitesß
