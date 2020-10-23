@@ -2,6 +2,8 @@
 #' BsmBIstuffer defaults to sequence for containing BsmBI sitesß
 #' REseq5p defaults to contain BstxI site
 #' REseq3p defaults to contain BlpI site
+#'@export
+#'@return character containing assembled oligo sequence
 assembleCas9DualgRNALibraryOligo <- function( spacer1,
                                             spacer2,
                                             BsmBIstuffer = 'gtttcagagcgagacgtgcctgcaggatacgtctcagaaacatg',
