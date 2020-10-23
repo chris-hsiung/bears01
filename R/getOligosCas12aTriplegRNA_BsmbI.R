@@ -1,6 +1,6 @@
 #' for individually cloning Cas12a triple spacer array into vector withi BsmBI site (e.g. pRG212)
 #'@export
-#'#'@return data frame of oligos
+#'@return data frame of oligos
 
 getOligosCas12aTriplegRNA_BsmbI <- function( pos1name,
                                        pos1spacer,

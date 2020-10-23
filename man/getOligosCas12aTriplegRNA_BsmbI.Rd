@@ -15,6 +15,9 @@ getOligosCas12aTriplegRNA_BsmbI(
   outputdir = getwd()
 )
 }
+\value{
+data frame of oligos
+}
 \description{
 for individually cloning Cas12a triple spacer array into vector withi BsmBI site (e.g. pRG212)
 }
