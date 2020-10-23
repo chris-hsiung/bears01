@@ -1,4 +1,5 @@
 #' sum total occurrence of restriction sites for a dsDNA sequence (input one strand)
+#'@export
 countBstXI <- function( x ){
       x <- Biostrings::DNAString(x)
 
