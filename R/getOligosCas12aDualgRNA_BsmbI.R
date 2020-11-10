@@ -17,10 +17,10 @@ getOligosCas12aDualgRNA_BsmbI <- function( pos1name, pos1spacer, pos2name, pos2s
       pos2antisenseoligo <- stringr::str_c( Biostrings::reverse('TTAA'), bears01::getReverseComplement( pos2spacer ), Biostrings::reverse('AACATCTA') )
 
       oligodf <- data.frame( name = c(
-            paste0(pos1name, '_sense'),
-            paste0(pos1name, '_antisense' ),
-            paste0(pos2name, '_sense'),
-            paste0(pos2name, '_antisense') ),
+            paste0(pos1name, '_sense1'),
+            paste0(pos1name, '_antisense1' ),
+            paste0(pos2name, '_sense2'),
+            paste0(pos2name, '_antisense2') ),
 
             sequence = c(
                   pos1senseoligo,
