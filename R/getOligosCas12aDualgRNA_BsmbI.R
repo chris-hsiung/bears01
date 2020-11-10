@@ -1,4 +1,5 @@
-#' not thoroughly vetted yet
+#' for cloning double spacer into vector with BsmBI site (e.g. pRG212)
+#'@export
 getOligosCas12aDualgRNA_BsmbI <- function( pos1name, pos1spacer, pos2name, pos2spacer, outputdir = getwd() ){
 
 

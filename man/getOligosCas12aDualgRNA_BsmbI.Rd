@@ -2,7 +2,7 @@
 % Please edit documentation in R/getOligosCas12aDualgRNA_BsmbI.R
 \name{getOligosCas12aDualgRNA_BsmbI}
 \alias{getOligosCas12aDualgRNA_BsmbI}
-\title{not thoroughly vetted yet}
+\title{for cloning double spacer into vector with BsmBI site (e.g. pRG212)}
 \usage{
 getOligosCas12aDualgRNA_BsmbI(
   pos1name,
@@ -13,5 +13,5 @@ getOligosCas12aDualgRNA_BsmbI(
 )
 }
 \description{
-not thoroughly vetted yet
+for cloning double spacer into vector with BsmBI site (e.g. pRG212)
 }
