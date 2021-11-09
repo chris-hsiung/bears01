@@ -2,10 +2,12 @@
 % Please edit documentation in R/getOligosCas12aSinglegRNA_BsmbI.R
 \name{getOligosCas12aSinglegRNA_BsmbI}
 \alias{getOligosCas12aSinglegRNA_BsmbI}
-\title{for cloning single spacer into vector with BsmBI site (e.g. pRG212)}
+\title{for cloning single spacer into vector with BsmBI site
+compatible with both As DR (e.g. pRG212) and Lb DR crRNA expression vector designs (e.g. pCH011)}
 \usage{
 getOligosCas12aSinglegRNA_BsmbI(name, spacer, outputdir = getwd())
 }
 \description{
-for cloning single spacer into vector with BsmBI site (e.g. pRG212)
+for cloning single spacer into vector with BsmBI site
+compatible with both As DR (e.g. pRG212) and Lb DR crRNA expression vector designs (e.g. pCH011)
 }
