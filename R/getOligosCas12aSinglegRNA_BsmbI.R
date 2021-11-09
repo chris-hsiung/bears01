@@ -1,8 +1,9 @@
-#' for cloning single spacer into vector with BsmBI site (e.g. pRG212)
+#' for cloning single spacer into vector with BsmBI site
+#' compatible with both As DR (e.g. pRG212) and Lb DR crRNA expression vector designs (e.g. pCH011)
 #'@export
 getOligosCas12aSinglegRNA_BsmbI <- function( name, spacer, outputdir = getwd() ){
       assertthat::assert_that(
-            nchar(spacer) >= 19 & nchar(spacer) <= 23,
+            nchar(spacer) >= 19,
             msg = 'incorrect spacer length'
       )
 
