@@ -19,7 +19,8 @@ Imports:
     Biostrings,
     dplyr,
     stringr,
-    magrittr
+    magrittr,
+    readr
 
     
 
