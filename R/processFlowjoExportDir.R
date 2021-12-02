@@ -3,11 +3,11 @@
 #' @export
 processFlowjoExportDir <- function( dir, csvstring = '_P1.csv', fileout = 'P1_combodf.txt', platesetupfile = 'platesetup.txt', IDvar = 'Sample' ){
 
-      assertthat::assert_that( file.exists( file.path(dir, platesetupfile)), msg = paste0( plastesetupfile, ' does not exist') )
+      assertthat::assert_that( file.exists( file.path(dir, platesetupfile)), msg = paste0( platesetupfile, ' does not exist') )
 
       annodf <- read_delim( file.path( dir, platesetupfile), delim = '\t' )
 
-      assertthat::assert_that( IDvar %in% names(annodf), msg = paset0( IDvar, 'is not a column name in ', plaetsetupfile ) )
+      assertthat::assert_that( IDvar %in% names(annodf), msg = paste0( IDvar, 'is not a column name in ', platesetupfile ) )
 
       csvfiles <- list.files( dir )[ grepl( csvstring, list.files( dir )  ) ]
 
