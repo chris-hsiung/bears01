@@ -16,8 +16,8 @@ getLibraryOligoCas12aTriplegRNA <- function( pos1name,
                                                  pos3name,
                                                  pos3spacer,
                                                  Adaptor5p,
-                                                 Adaptor3p,
-                                                 outputdir = getwd() ){
+                                                 Adaptor3p
+                                             ){
 
       assertthat::assert_that(
             sum (nchar( c(pos1spacer, pos2spacer, pos3spacer) ) >= 19) == 3 &
