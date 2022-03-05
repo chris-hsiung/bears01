@@ -1,5 +1,5 @@
 #' Function to assemble 6-plex oligo for pooled synthesis for Cas12a 6-plex gRNA expression. The oligo will consist of:
-#' Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone (e.g. compatible with vectors pRG212, pCH39, pCH49, etc.) The backbone is assumd to contain DRWT 5' to the pos1spacer and DR8 3' to the pos3spacer. The final transcript is: DRWT-pos1spacer-DR1-pos2spacer-DR3-pos3spacer-DR8. DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
+#' Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone (e.g. compatible with vectors pRG212, pCH39, pCH49, etc.) The backbone is assumed to contain DRWT 5' to the pos1spacer and DR8 3' to the pos3spacer. The final transcript is: DRWT-pos1spacer-DR1-pos2spacer-DR3-pos3spacer-DR8. DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
 #' The input spacers and adaptors should not contain BsmbI sites.
 #' The input spacers should not contain >= 4 consecutive T's, and should not start with TTT, because the last base of each DR is a T and this will form an undesirable TTTT at the junction.
 #' Checks final oligo for undesirable BsmbI sites (in excess of the 2 that should be there); if fails, throws error.
