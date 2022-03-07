@@ -2,14 +2,8 @@
 % Please edit documentation in R/getLibraryOligoCas12aTriplegRNA.R
 \name{getLibraryOligoCas12aTriplegRNA}
 \alias{getLibraryOligoCas12aTriplegRNA}
-\title{Function to assemble 6-plex oligo for pooled synthesis for Cas12a 6-plex gRNA expression. The oligo will consist of:
-Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone (e.g. compatible with vectors pRG212, pCH39, pCH49, etc.) The backbone is assumd to contain DRWT 5' to the pos1spacer and DR8 3' to the pos3spacer. The final transcript is: DRWT-pos1spacer-DR1-pos2spacer-DR3-pos3spacer-DR8. DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
-The input spacers and adaptors should not contain BsmbI sites.
-The input spacers should not contain >= 4 consecutive T's, and should not start with TTT, because the last base of each DR is a T and this will form an undesirable TTTT at the junction.
-Checks final oligo for undesirable BsmbI sites (in excess of the 2 that should be there); if fails, throws error.
-Checks for undesirable >= 4 consecutive T's in transcript; if fails, throws error.
-Checks final oligo contains valid DNA bases only by calling Biostrings::DNAString(); if fails, throws error.
-by Chris Hsiung 2022-03-03}
+\title{Function to assemble oligo for pooled synthesis for Cas12a 3-plex gRNA expression. The oligo will consist of: Adaptor5p-BsmbI5p-pos1spacer-DR1-pos2spacer-DR3-pos3spacer-BsmbI3p-Adaptor3p. DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
+Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone.  The BsmbI5p and BsmbI3p sites are hard-coded to be compatible with vector backbone containing 5' DR and 3' DR sequences, which are not encoded in the oligo itself (e.g. compatible with vectors designs of pRG212, pCH39, pCH49, etc.).}
 \usage{
 getLibraryOligoCas12aTriplegRNA(
   pos1name,
@@ -19,20 +13,27 @@ getLibraryOligoCas12aTriplegRNA(
   pos3name,
   pos3spacer,
   Adaptor5p,
-  Adaptor3p,
-  outputdir = getwd()
+  Adaptor3p
 )
+}
+\arguments{
+\item{pos1name, pos2name, pos3name}{string containing name for each spacer.}
+
+\item{pos1spacer, pos2spacer, pos3spacer}{string containing only spacer DNA sequences of length 19-23nt. Must not contain BsmbI sites. Must not contain TTTT. Must not start with TTT, because the last base of each DR is a T and that would form an undesirable TTTT at the junction.}
+
+\item{Adaptor5p, Adaptor3p}{string containing PCR adaptor sequences to be used for subpool amplification (recommend taking from https://weissman.wi.mit.edu/crispr/)
+The final oligo is checked for undesirable BsmbI sites (in excess of the 2 that should be there); if fails, throws error.}
 }
 \value{
 A list containing oligoname and oligosequence. oligoname is in the format 'pos1name_pos2name_pos3name'.
 }
 \description{
-Function to assemble 6-plex oligo for pooled synthesis for Cas12a 6-plex gRNA expression. The oligo will consist of:
-Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone (e.g. compatible with vectors pRG212, pCH39, pCH49, etc.) The backbone is assumd to contain DRWT 5' to the pos1spacer and DR8 3' to the pos3spacer. The final transcript is: DRWT-pos1spacer-DR1-pos2spacer-DR3-pos3spacer-DR8. DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
-The input spacers and adaptors should not contain BsmbI sites.
-The input spacers should not contain >= 4 consecutive T's, and should not start with TTT, because the last base of each DR is a T and this will form an undesirable TTTT at the junction.
-Checks final oligo for undesirable BsmbI sites (in excess of the 2 that should be there); if fails, throws error.
-Checks for undesirable >= 4 consecutive T's in transcript; if fails, throws error.
-Checks final oligo contains valid DNA bases only by calling Biostrings::DNAString(); if fails, throws error.
-by Chris Hsiung 2022-03-03
+Function to assemble oligo for pooled synthesis for Cas12a 3-plex gRNA expression. The oligo will consist of: Adaptor5p-BsmbI5p-pos1spacer-DR1-pos2spacer-DR3-pos3spacer-BsmbI3p-Adaptor3p. DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
+Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone.  The BsmbI5p and BsmbI3p sites are hard-coded to be compatible with vector backbone containing 5' DR and 3' DR sequences, which are not encoded in the oligo itself (e.g. compatible with vectors designs of pRG212, pCH39, pCH49, etc.).
+}
+\examples{
+getLibraryOligoCas12aTriplegRNA( pos1name = 'CD81-1', pos1spacer = 'GGCGCGACCCCCAGGAAGGTCTC', pos2name = 'B2M-1', pos2spacer = 'ATATAAGTGGAGGCGTCGCGCTG', pos3name = 'KIT-2', pos3spacer = 'TCTGCGTTCTGCTCCTACTGCTT', Adaptor5p = 'ATTTTGCCCCTGGTTCTT', Adaptor3p = 'CCAGTTCATTTCTTAGGG')
+}
+\author{
+Chris Hsiung
 }
