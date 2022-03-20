@@ -16,8 +16,9 @@ removeBadCRISPickSpacers <- function( CRISPickfile ){
 
 
       df <- dplyr::rowwise(df) %>%
-            dplyr::mutate( countBsmbI = bears01::countBsmBI(`sgRNA.Sequence`),
-                           TTTTstatus = ifelse( grepl( 'TTTT', `sgRNA.Sequence`), TRUE, FALSE ),
+            dplyr::mutate( countBsmbI = bears01::countBsmBI(`sgRNA.Sequence`) ) %>%
+            dplyr::ungroup() %>%
+            dplyr::mutate( TTTTstatus = ifelse( grepl( 'TTTT', `sgRNA.Sequence`), TRUE, FALSE ),
                            TTTstart = ifelse( grepl('^TTT', `sgRNA.Sequence`), TRUE, FALSE ),
                            keep = ifelse( countBsmbI > 0 | TTTTstatus == TRUE | TTTstart == TRUE, FALSE, TRUE ),
                            filename = basename( CRISPickfile)
