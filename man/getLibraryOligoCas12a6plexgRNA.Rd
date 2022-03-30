@@ -26,7 +26,7 @@ getLibraryOligoCas12a6plexgRNA(
 )
 }
 \arguments{
-\item{pos1name, pos2name, pos3name, pos4name, pos5name, pos6name}{optional string containing name for each spacer. Defaults to 'holder' if not supplied.}
+\item{pos1name, pos2name, pos3name, pos4name, pos5name, pos6name, sep}{optional string containing name for each spacer that will be separated by 'sep' if returning a name for the oligo is desired. Names defaults to 'holder' if not supplied.}
 
 \item{pos1spacer, pos2spacer, pos3spacer, pos4spacer, pos5spacer, pos6spacer}{string containing only spacer DNA sequences of length 19-23nt. Must not contain BsmbI sites. Must not contain TTTT. Must not start with TTT, because the last base of each DR is a T and that would form an undesirable TTTT at the junction.}
 
