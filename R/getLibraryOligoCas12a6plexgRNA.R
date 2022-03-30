@@ -23,6 +23,7 @@ getLibraryOligoCas12a6plexgRNA <- function( pos1name,
                                             pos6spacer,
                                             Adaptor5p,
                                             Adaptor3p,
+                                            sep = '_',
                                             outputdir = getwd()
 ){
 
@@ -50,7 +51,7 @@ getLibraryOligoCas12a6plexgRNA <- function( pos1name,
 
       # assertion to check all inputs are DNA
       oligosequence <- as.character( Biostrings::DNAString( oligo ) )
-      oligoname <- paste0( pos1name, '_', pos2name, '_', pos3name, '_', pos4name, '_', pos5name, '_', pos6name)
+      oligoname <- paste0( pos1name, sep, pos2name, sep, pos3name, sep, pos4name, sep, pos5name, sep, pos6name)
 
       # check for BsmbI sites in oligo
       assertthat::assert_that( bears01::countBsmBI(oligosequence) == 2, msg = paste0( oligoname, ' contains undesirable BsmbI sites') )

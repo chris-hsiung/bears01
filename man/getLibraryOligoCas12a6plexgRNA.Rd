@@ -21,6 +21,7 @@ getLibraryOligoCas12a6plexgRNA(
   pos6spacer,
   Adaptor5p,
   Adaptor3p,
+  sep = "_",
   outputdir = getwd()
 )
 }
