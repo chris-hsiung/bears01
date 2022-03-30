@@ -7,17 +7,17 @@ DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
 Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone.  The BsmbI5p and BsmbI3p sites are hard-coded to be compatible with vector backbone containing 5' DR and 3' DR sequences, which are not encoded in the oligo itself (e.g. compatible with vectors designs of pRG212, pCH39, pCH49, etc.).}
 \usage{
 getLibraryOligoCas12a6plexgRNA(
-  pos1name,
+  pos1name = "holder",
   pos1spacer,
-  pos2name,
+  pos2name = "holder",
   pos2spacer,
-  pos3name,
+  pos3name = "holder",
   pos3spacer,
-  pos4name,
+  pos4name = "holder",
   pos4spacer,
-  pos5name,
+  pos5name = "holder",
   pos5spacer,
-  pos6name,
+  pos6name = "holder",
   pos6spacer,
   Adaptor5p,
   Adaptor3p,
@@ -26,7 +26,7 @@ getLibraryOligoCas12a6plexgRNA(
 )
 }
 \arguments{
-\item{pos1name, pos2name, pos3name, pos4name, pos5name, pos6name}{string containing name for each spacer.}
+\item{pos1name, pos2name, pos3name, pos4name, pos5name, pos6name}{optional string containing name for each spacer. Defaults to 'holder' if not supplied.}
 
 \item{pos1spacer, pos2spacer, pos3spacer, pos4spacer, pos5spacer, pos6spacer}{string containing only spacer DNA sequences of length 19-23nt. Must not contain BsmbI sites. Must not contain TTTT. Must not start with TTT, because the last base of each DR is a T and that would form an undesirable TTTT at the junction.}
 
