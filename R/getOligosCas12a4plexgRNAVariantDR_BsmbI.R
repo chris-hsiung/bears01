@@ -3,9 +3,9 @@
 #' For gene block approach, by default insert is appended with homology regions (Gibson5p and Gibson3p as input arguments) compatible with Gibson assembly into pCH49.
 #' For oligos/ultramer approach: nomenclature for naming sense and antisense strands is as follows: sense1 anneals with antisense1, sense2 anneals with antisense2, sense 3 anneals with antisense3, etc. These prefixes are printed at the front of the string to facilitate setting up annealing reactions because the IDT tubes truncates the end of the long string.
 
-#' by Chris Hsiung, updated 2021-12-23
+#' by Chris Hsiung, updated 2022-04-12 to include checks against TTTT and starting with TTT
 #'@export
-#'@return list of data frames containing 1. oligos (this is too expensive but is kept as an available alternative for now) and 2. gene block
+#'@return list of data frames containing 1. oligos (this is kept as an available alternative for now) and 2. gene block
 
 getOligosCas12a4plexgRNAVariantDR_BsmbI <- function( pos1name,
                                                      pos1spacer,
@@ -66,6 +66,15 @@ getOligosCas12a4plexgRNAVariantDR_BsmbI <- function( pos1name,
             name = paste0( 'gb_', concatname),
             sequence = geneblock
       )
+
+
+      # check insert for TTTT
+      assertthat::assert_that( !(grepl('TTTT', insert_sense)), msg = paste0( oligoname, ' transcribed region contains TTTT' ) )
+
+      # check spacers for starting with TTT, this checks for the case where pos1spacer starts with TTT, which would otherwise be missed
+      allspacers <- c(pos1spacer, pos2spacer, pos3spacer, pos4spacer )
+      assertthat::assert_that( !(any( grepl( '^TTT', allspacers) )), msg = paste0( oligoname, ' spacer starts with TTT' ) )
+
 
       return( list( oligodf = oligodf, geneblock = geneblockdf ) )
 }
