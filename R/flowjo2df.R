@@ -1,6 +1,7 @@
 #' Function to read csv file exported from flowjo. The original .fcs files from which the .csv file was generated must contain keywords. Parses sampleID from $FIL keyword and platename from $PLATENAME keyword and date from $DATE keyword.
 #' Returns data frame
 #' Intended for use within the function processFlowjoExportDir() for processing an entire directory of .csv files.
+#' Updated 2022-08-02 to remove additional header lines inserted by Arc Attune that do not start with '$'
 #' @export
 flowjo2df <- function( file ){
 
@@ -10,9 +11,9 @@ flowjo2df <- function( file ){
 
       metainfo <- lines2[ grepl("^\\$|^\\#", lines2) ]
 
-      headercsv <- lines2[ grepl('FSC-A', lines2) & !grepl("^\\$|^\\#|FJ_FCS_VERSION", lines2) ]
+      headercsv <- lines2[ grepl('FSC-A', lines2) & !grepl("^\\$|^\\#|FJ_FCS_VERSION|^HOSTID,XE3-IoT-", lines2) ]
 
-      datacsv <- lines2[ !grepl("^\\$|^\\#|FJ_FCS_VERSION", lines2) & !grepl('FSC-A', lines2) ]
+      datacsv <- lines2[ !grepl("^\\$|^\\#|FJ_FCS_VERSION|^HOSTID,XE3-IoT-", lines2) & !grepl('FSC-A', lines2) ]
 
       if ( length(datacsv) == 0 ){
             message( paste0( file, ' contains no data, skipping.'))

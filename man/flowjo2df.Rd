@@ -4,7 +4,8 @@
 \alias{flowjo2df}
 \title{Function to read csv file exported from flowjo. The original .fcs files from which the .csv file was generated must contain keywords. Parses sampleID from $FIL keyword and platename from $PLATENAME keyword and date from $DATE keyword.
 Returns data frame
-Intended for use within the function processFlowjoExportDir() for processing an entire directory of .csv files.}
+Intended for use within the function processFlowjoExportDir() for processing an entire directory of .csv files.
+Updated 2022-08-02 to remove additional header lines inserted by Arc Attune that do not start with '$'}
 \usage{
 flowjo2df(file)
 }
@@ -12,4 +13,5 @@ flowjo2df(file)
 Function to read csv file exported from flowjo. The original .fcs files from which the .csv file was generated must contain keywords. Parses sampleID from $FIL keyword and platename from $PLATENAME keyword and date from $DATE keyword.
 Returns data frame
 Intended for use within the function processFlowjoExportDir() for processing an entire directory of .csv files.
+Updated 2022-08-02 to remove additional header lines inserted by Arc Attune that do not start with '$'
 }

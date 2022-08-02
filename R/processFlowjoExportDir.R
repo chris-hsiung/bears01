@@ -17,7 +17,7 @@ processFlowjoExportDir <- function( dir, csvstring = '_P1.csv', fileout = 'P1_co
 
       for ( f in 1:length(csvfiles) ){
 
-            df <- flowjo2df( file.path( dir, csvfiles[f]) )
+            df <- bears01::flowjo2df( file.path( dir, csvfiles[f]) )
 
             filelist[[f]] <- df
       }
