@@ -1,20 +1,15 @@
-#' This function calculates differential enrichment from screen raw read counts
+#' This function calculates gamma from screen raw read counts
 #' @param df is a data frame, must contain column names matching initcount, finalcount, and spacertype
 #' @param initcount is a string for name of column in df containing raw read counts of initial condition (e.g. T0 in growth screen)
 #' @param finalcount is a string for name of a column in df containing raw read counts of final condition (e.g. Tfinal in growth screen)
-#' @return a data frame with diffenrich added as column. This can be aggregated (e.g. take average across replicates) before being transformed (e.g. log2).
+#' @param growthrate is number of doublings per day
+#' @param duration is days between start and end of screen
+#' @param spacertype string correpsonding to column name in df that categorizes which rows are negative controls
+#' @param negctrllabel string corresponding to label given to negative controls in the column specified by spacertype
+#' @return a data frame with gammascore added as column
 #' @export
 
-# df <- subset( spacercountdf2, Protein == 'Cas12a_v1' & RepID == 'Rep1' )
-
-# initcount <- 'T0'
-# finalcount <- 'T10'
-# spacertype <- 'spacertype2'
-# negctrllabel <- 'negctrl'
-# growthrate <- 1
-# days <- 10
-
-getDiffEnrichment <- function( df, initcount, finalcount, spacertype = 'spacertype', negctrllabel = 'negctrl' ){
+getGammaScore <- function( df, initcount, finalcount, spacertype = 'spacertype', negctrllabel = 'negctrl', growthrate = 1, duration = 10 ){
       df <- as.data.frame(df)
 
       assertthat::assert_that( sum( c(initcount, finalcount, spacertype ) %in% names(df) ) == 3, msg = 'column names incorrect' )
@@ -35,7 +30,7 @@ getDiffEnrichment <- function( df, initcount, finalcount, spacertype = 'spacerty
                   negctrlmedianRPM_final = negctrlmediancount_final/totalcount_final,
                   targetRPM_init = .data[[initcount]]/(totalcount_init/1e6),
                   targetRPM_final = .data[[finalcount]]/(totalcount_final/1e6),
-                  diffenrich = (targetRPM_final/negctrlmedianRPM_final)/(targetRPM_init/negctrlmedianRPM_init)
+                  gammascore = log2( (targetRPM_final/negctrlmedianRPM_final)/(targetRPM_init/negctrlmedianRPM_init) ) / (growthrate*duration)
       )
 
       return(dfout)
