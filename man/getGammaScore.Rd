@@ -10,8 +10,7 @@ getGammaScore(
   finalcount,
   spacertype = "spacertype",
   negctrllabel = "negctrl",
-  growthrate = 1,
-  duration = 10
+  doublings
 )
 }
 \arguments{
@@ -25,9 +24,7 @@ getGammaScore(
 
 \item{negctrllabel}{string corresponding to label given to negative controls in the column specified by spacertype}
 
-\item{growthrate}{is number of doublings per day}
-
-\item{duration}{is days between start and end of screen}
+\item{doublings}{is total number of cell population doublings between start and end of screen}
 }
 \value{
 a data frame with gammascore added as column
