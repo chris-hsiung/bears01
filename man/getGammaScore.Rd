@@ -10,7 +10,7 @@ getGammaScore(
   finalcount,
   spacertype = "spacertype",
   negctrllabel = "negctrl",
-  doublings
+  doublings = "totaldoublings"
 )
 }
 \arguments{
@@ -20,11 +20,11 @@ getGammaScore(
 
 \item{finalcount}{is a string for name of a column in df containing raw read counts of final condition (e.g. Tfinal in growth screen)}
 
-\item{spacertype}{string correpsonding to column name in df that categorizes which rows are negative controls}
+\item{spacertype}{string corresponding to column name in df that categorizes which rows are negative controls}
 
 \item{negctrllabel}{string corresponding to label given to negative controls in the column specified by spacertype}
 
-\item{doublings}{is total number of cell population doublings between start and end of screen}
+\item{doublings}{is a string for name of numeric column in df containing total number of cell population doublings between start and end of screen}
 }
 \value{
 a data frame with gammascore added as column
