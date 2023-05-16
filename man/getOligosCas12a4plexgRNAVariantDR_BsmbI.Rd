@@ -3,10 +3,10 @@
 \name{getOligosCas12a4plexgRNAVariantDR_BsmbI}
 \alias{getOligosCas12a4plexgRNAVariantDR_BsmbI}
 \title{for individually cloning Cas12a 4-plex spacer array into vector with BsmBI site (e.g. pRG212). Modified from protocol by Qingzhou Chen and Junwei Shi. Variant DR sequences from Deweirdt et al. are used to minimize recombination
-Returns a list with two data frames, one containing oligos/ultramers, the other containing gene block. User can choose to use either one for synthesis, but gene block is more cost effective.
+Returns a list with two data frames, one containing oligos, the other containing gene block. User can choose to use either one for synthesis.
 For gene block approach, by default insert is appended with homology regions (Gibson5p and Gibson3p as input arguments) compatible with Gibson assembly into pCH49.
-For oligos/ultramer approach: nomenclature for naming sense and antisense strands is as follows: sense1 anneals with antisense1, sense2 anneals with antisense2, sense 3 anneals with antisense3, etc. These prefixes are printed at the front of the string to facilitate setting up annealing reactions because the IDT tubes truncates the end of the long string.
-by Chris Hsiung, updated 2022-04-12 to include checks against TTTT and starting with TTT}
+For oligos approach: nomenclature for naming sense and antisense strands is as follows: sense1 anneals with antisense1, sense2 anneals with antisense2, sense 3 anneals with antisense3, etc. These prefixes are printed at the front of the string to facilitate setting up annealing reactions because the IDT tubes truncates the end of the long string. Overhangs of oligos are designed to be in spacer (variable) regions.
+by Chris Hsiung, updated 2022-04-12 to include checks against TTTT and starting with TTT; updated 2023-05-15 to make oligo output strictly <=60bp}
 \usage{
 getOligosCas12a4plexgRNAVariantDR_BsmbI(
   pos1name,
@@ -26,12 +26,12 @@ getOligosCas12a4plexgRNAVariantDR_BsmbI(
 )
 }
 \value{
-list of data frames containing 1. oligos (this is kept as an available alternative for now) and 2. gene block
+list of data frames containing 1. <=60bp oligos and 2. gene block
 }
 \description{
 for individually cloning Cas12a 4-plex spacer array into vector with BsmBI site (e.g. pRG212). Modified from protocol by Qingzhou Chen and Junwei Shi. Variant DR sequences from Deweirdt et al. are used to minimize recombination
-Returns a list with two data frames, one containing oligos/ultramers, the other containing gene block. User can choose to use either one for synthesis, but gene block is more cost effective.
+Returns a list with two data frames, one containing oligos, the other containing gene block. User can choose to use either one for synthesis.
 For gene block approach, by default insert is appended with homology regions (Gibson5p and Gibson3p as input arguments) compatible with Gibson assembly into pCH49.
-For oligos/ultramer approach: nomenclature for naming sense and antisense strands is as follows: sense1 anneals with antisense1, sense2 anneals with antisense2, sense 3 anneals with antisense3, etc. These prefixes are printed at the front of the string to facilitate setting up annealing reactions because the IDT tubes truncates the end of the long string.
-by Chris Hsiung, updated 2022-04-12 to include checks against TTTT and starting with TTT
+For oligos approach: nomenclature for naming sense and antisense strands is as follows: sense1 anneals with antisense1, sense2 anneals with antisense2, sense 3 anneals with antisense3, etc. These prefixes are printed at the front of the string to facilitate setting up annealing reactions because the IDT tubes truncates the end of the long string. Overhangs of oligos are designed to be in spacer (variable) regions.
+by Chris Hsiung, updated 2022-04-12 to include checks against TTTT and starting with TTT; updated 2023-05-15 to make oligo output strictly <=60bp
 }

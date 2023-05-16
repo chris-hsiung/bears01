@@ -1,6 +1,6 @@
 #' for individually cloning Cas12a triple spacer array into vector with BsmBI site containing a 3' DR in the style of pRG212 (see Gier et al. 2020, uses As DR WT on 5' end and As DR WT on 3' end). For middle 2 spacers, uses variant As DR1 and DR3 sequences from DeWeirdt et al., excluding the first nt in Fig. 4c, i.e. each DR is 19nt, same as in pRG212).  Also compatible with pCH28 (uses As DR WT on 5' end and As DR8 variant on 3' end).
 #' Nomenclature for naming sense and antisense strands is as follows: sense1 anneals with antisense1, sense2 anneals with antisense2, sense 3 anneals with antisense3, etc. These prefixes are printed at the front of the string to facilitate setting up annealing reactions because the IDT tubes truncates the end of the long string.
-#' updated 9/9/21
+#' updated 9/9/21, updated 2023-05-15
 #'@export
 #'@return data frame of oligos
 
@@ -33,15 +33,15 @@ getOligosCas12aTriplegRNAVariantAsDR_BsmbI <- function( pos1name,
       oligodf <- data.frame(
          name = c(
             paste0( 'As-sense1_', concatname ),
-            paste0( 'As-sense2_', concatname ),
             paste0( 'As-antisense1_', concatname),
+            paste0( 'As-sense2_', concatname ),
             paste0( 'As-antisense2_', concatname)
          ),
 
          sequence = c(
             senseoligo1,
-            senseoligo2,
             antisenseoligo1,
+            senseoligo2,
             antisenseoligo2)
       )
 

@@ -2,6 +2,7 @@
 #' Returns data frame
 #' Intended for use within the function processFlowjoExportDir() for processing an entire directory of .csv files.
 #' Updated 2022-08-02 to remove additional header lines inserted by Arc Attune that do not start with '$'
+#' Updated 2023-04-04 added additional regex matches for identifying datacsv in case some variables are not exported from flowjo
 #' @export
 flowjo2df <- function( file ){
 
@@ -13,7 +14,7 @@ flowjo2df <- function( file ){
 
       headercsv <- lines2[ grepl('FSC-A', lines2) & !grepl("^\\$|^\\#|FJ_FCS_VERSION|^HOSTID,XE3-IoT-", lines2) ]
 
-      datacsv <- lines2[ !grepl("^\\$|^\\#|FJ_FCS_VERSION|^HOSTID,XE3-IoT-", lines2) & !grepl('FSC-A', lines2) ]
+      datacsv <- lines2[ !grepl("^\\$|^\\#|FJ_FCS_VERSION|^HOSTID,XE3-IoT-", lines2) & !grepl('FSC-A|SSC-A|BL1-A|VL1-A|RL1-A|YL1-A', lines2) ]
 
       if ( length(datacsv) == 0 ){
             message( paste0( file, ' contains no data, skipping.'))
