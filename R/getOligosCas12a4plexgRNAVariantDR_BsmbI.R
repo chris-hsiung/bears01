@@ -37,7 +37,7 @@ getOligosCas12a4plexgRNAVariantDR_BsmbI <- function( pos1name,
       # Design oligos, they will all be <= 60bp oligos
       sense1 <- substr( insert_sense, 1, 60 )
       sense2 <-substr( insert_sense, 61, 106)
-      sense3 <- substr( insert_sense, 106, nchar(insert_sense))
+      sense3 <- substr( insert_sense, 107, nchar(insert_sense))
 
       antisense1 <- substr( insert_antisense, 107, nchar(insert_antisense) )
       antisense2 <- substr( insert_antisense, 61, 106 )
