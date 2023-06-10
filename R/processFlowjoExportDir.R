@@ -1,7 +1,8 @@
 #' Function to batch process .csv files (containing the substring specified by 'csvstring') exported from flowjo within the directory specified by 'dir'. Directory must contain 'platesetupfile' (a tab-delimited .txt file) that contains column with name specified by 'IDvar' (defaults to 'Sample') that should contain 96well ID's that are matched to the $FIL keyword in the .fcs file exported from the Attune.
 #' Outputs a tab-delimited .txt file with file name specified by 'fileout'.
 #' @export
-processFlowjoExportDir <- function( dir, csvstring = '_P1.csv', fileout = 'P1_combodf.txt', platesetupfile = 'platesetup.txt', IDvar = 'Sample' ){
+#' 2023-06-09 added fcsheader option to denote whether exported csv file contains FCS headers. if FALSE then will parse Sample based removing csvstring from file name.
+processFlowjoExportDir <- function( dir, csvstring = '_P1.csv', fileout = 'P1_combodf.txt', platesetupfile = 'platesetup.txt', IDvar = 'Sample', fcsheader = TRUE ){
 
       assertthat::assert_that( file.exists( file.path(dir, platesetupfile)), msg = paste0( platesetupfile, ' does not exist') )
 
@@ -16,8 +17,17 @@ processFlowjoExportDir <- function( dir, csvstring = '_P1.csv', fileout = 'P1_co
       filelist <- vector( mode = 'list', length(csvfiles) )
 
       for ( f in 1:length(csvfiles) ){
+            if( fcsheader == TRUE ){
 
-            df <- bears01::flowjo2df( file.path( dir, csvfiles[f]) )
+                  df <- bears01::flowjo2df( file.path( dir, csvfiles[f]) )
+            } else{
+                  df <- fread( file.path( dir, csvfiles[f]) ) %>%
+                        dplyr::mutate(
+                              filename = csvfiles[f],
+                              Sample = stringr::str_remove(string = csvfiles[f], pattern = csvstring)
+                        )
+            }
+
 
             filelist[[f]] <- df
       }

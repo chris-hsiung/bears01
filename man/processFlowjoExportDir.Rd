@@ -10,7 +10,8 @@ processFlowjoExportDir(
   csvstring = "_P1.csv",
   fileout = "P1_combodf.txt",
   platesetupfile = "platesetup.txt",
-  IDvar = "Sample"
+  IDvar = "Sample",
+  fcsheader = TRUE
 )
 }
 \description{
