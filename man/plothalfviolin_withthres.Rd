@@ -8,6 +8,7 @@ plothalfviolin_withthres(
   data,
   x_var,
   y_var,
+  summaryfn_var = "median",
   fill_var,
   dodge_width = 0.8,
   color_palette = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00",

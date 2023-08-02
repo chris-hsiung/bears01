@@ -1,3 +1,42 @@
+#' Scatter Plot with Thresholds and Quadrant Statistics
+#'
+#' This function creates a scatter plot using the ggplot2 package. The scatter plot is divided
+#' into four quadrants using specified x and y thresholds. The percentage of data points in
+#' each quadrant is calculated and displayed within the respective quadrant.
+#'
+#' @param df A data frame containing the data to be plotted.
+#' @param facetformula_var A character string specifying the faceting formula for the plot.
+#' @param x_var A character string specifying the column name for the x-axis variable in df.
+#' @param y_var A character string specifying the column name for the y-axis variable in df.
+#' @param xthres_var A character string specifying the column name for the x-axis threshold in df.
+#' @param ythres_var A character string specifying the column name for the y-axis threshold in df.
+#' @param quadrantx_var A numeric vector of length 4 specifying the x-coordinates for displaying quadrant statistics. Defaults to c(4.5, 4.5, 2, 2).
+#' @param quadranty_var A numeric vector of length 4 specifying the y-coordinates for displaying quadrant statistics. Defaults to c(5.2, 0.4, 0.4, 5.2).
+#' @param color_var A character string specifying the column name for point colors in df.
+#' @param alpha_var A numeric value between 0 and 1 specifying the transparency of the scatter points. Defaults to 0.2.
+#' @param basesize_var A numeric value greater than 0 specifying the base font size for the plot. Defaults to 15.
+#' @param title_var A character string specifying the title for the plot. Defaults to an empty string.
+#'
+#' @return A list containing:
+#' \itemize{
+#'   \item \code{dfout}: A data frame summarizing the percentage of points in each quadrant.
+#'   \item \code{plotout}: The ggplot2 object of the scatter plot.
+#' }
+#'
+#' @examples
+#' \dontrun{
+#'   df <- data.frame(x = rnorm(100), y = rnorm(100), color = sample(c('red', 'blue'), 100, replace = TRUE))
+#'   result <- plotscatter_withthres(df, "~.", "x", "y", "0", "0", color_var = "color")
+#'   print(result$plotout)
+#' }
+#'
+#' @importFrom ggplot2 ggplot geom_point geom_text geom_hline geom_vline facet_grid theme_bw ggtitle
+#' @importFrom dplyr group_by mutate summarise ungroup left_join
+#' @importFrom tidyr pivot_longer
+#' @importFrom stringr str_split str_remove
+#' @importFrom assertthat assert_that
+#' @export
+
 plotscatter_withthres <- function( df, facetformula_var, x_var, y_var, xthres_var, ythres_var, quadrantx_var = c( 4.5, 4.5, 2, 2), quadranty_var = c( 5.2, 0.4, 0.4, 5.2), color_var, alpha_var = 0.2, basesize_var = 15, title_var = '' ){
 
       # Assert input arguments
