@@ -7,7 +7,7 @@
 #' @param negctrllabel string corresponding to label given to negative controls in the column specified by spacertype
 #' @return a data frame with gammascore added as column
 #' @export
-
+#' updated 2023-08-17 fixed negctrlmedianRPM_init and negctrlmedianRPM_final by dividing both by 1e6, should not change any any gamma score calculations.
 getGammaScore <- function( df, initcount, finalcount, spacertype = 'spacertype', negctrllabel = 'negctrl', doublings = 'totaldoublings' ){
       df <- as.data.frame(df)
 
@@ -25,8 +25,8 @@ getGammaScore <- function( df, initcount, finalcount, spacertype = 'spacertype',
       dfout <- df %>% dplyr::mutate(
                   totalcount_init = sum(.data[[initcount]]),
                   totalcount_final = sum(.data[[finalcount]]),
-                  negctrlmedianRPM_init = negctrlmediancount_init/totalcount_init,
-                  negctrlmedianRPM_final = negctrlmediancount_final/totalcount_final,
+                  negctrlmedianRPM_init = negctrlmediancount_init/(totalcount_init/1e6),
+                  negctrlmedianRPM_final = negctrlmediancount_final/(totalcount_final/1e6),
                   targetRPM_init = .data[[initcount]]/(totalcount_init/1e6),
                   targetRPM_final = .data[[finalcount]]/(totalcount_final/1e6),
                   gammascore = log2( (targetRPM_final/negctrlmedianRPM_final)/(targetRPM_init/negctrlmedianRPM_init) )/unique(.data[[doublings]])
