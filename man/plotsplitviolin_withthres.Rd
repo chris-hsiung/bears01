@@ -56,5 +56,8 @@ plotsplitviolin_withthres(
 A ggplot object representing the half violin plot with thresholds.
 }
 \description{
+note for this to work properly, subset data frame ahead of time such that there fill_var is a factor of 2 levels -CH 2023-09-02
+}
+\details{
 This function creates a split violin plot with thresholds using ggplot2.
 }

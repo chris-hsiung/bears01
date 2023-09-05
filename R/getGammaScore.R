@@ -1,4 +1,5 @@
 #' This function calculates gamma from screen raw read counts
+# Updated 2023-08-17 fixed negctrlmedianRPM_init and negctrlmedianRPM_final by dividing both by 1e6, should not change any any gamma score calculations.
 #' @param df is a data frame, must contain column names matching initcount, finalcount, and spacertype
 #' @param initcount is a string for name of column in df containing raw read counts of initial condition (e.g. T0 in growth screen)
 #' @param finalcount is a string for name of a column in df containing raw read counts of final condition (e.g. Tfinal in growth screen)
@@ -7,7 +8,7 @@
 #' @param negctrllabel string corresponding to label given to negative controls in the column specified by spacertype
 #' @return a data frame with gammascore added as column
 #' @export
-#' updated 2023-08-17 fixed negctrlmedianRPM_init and negctrlmedianRPM_final by dividing both by 1e6, should not change any any gamma score calculations.
+
 getGammaScore <- function( df, initcount, finalcount, spacertype = 'spacertype', negctrllabel = 'negctrl', doublings = 'totaldoublings' ){
       df <- as.data.frame(df)
 

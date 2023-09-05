@@ -1,5 +1,7 @@
 #' Plot Split Violin with Thresholds
 #'
+#' note for this to work properly, subset data frame ahead of time such that there fill_var is a factor of 2 levels -CH 2023-09-02
+#'
 #' This function creates a split violin plot with thresholds using ggplot2.
 #'
 #' @param data A data frame containing the variables used for plotting.
@@ -36,20 +38,21 @@ plotsplitviolin_withthres <- function(data, x_var, y_var, fill_var, dodge_width 
       thresdf <- dplyr::select( data, all_of( c(y_var, thres_var, facet_strvar, fill_var) ) ) %>%
             unique()
 
-      labeldf <- dplyr::select( data, all_of( c(facet_strvar, perc_var, fill_var) ) ) %>%
+      labeldf <- dplyr::select( data, all_of( c(x_var, facet_strvar, perc_var, fill_var) ) ) %>%
             unique()
 
       plotout <- ggplot() +
             introdataviz::geom_split_violin( data = data, aes( x = !!sym(x_var), y = !!sym(y_var), fill = !!sym(fill_var)), alpha = .3, scale = 'width', trim = FALSE ) +
             stat_summary( data =  data, aes( x = !!sym(x_var), y = !!sym(y_var), color = !!sym(fill_var)), fun = mean, fun.max = function(x){quantile(x,0.25)}, fun.min = function(x){quantile(x,0.75)}, geom = "pointrange", show.legend = F, size = 1.5, fatten = 2, position_dodge( width = 0.4)) +
             geom_hline( data = thresdf, aes_string( yintercept = thres_var, color = fill_var), linetype = 'dashed' ) +
-            geom_text( data = labeldf, aes_string( x = x_var, y = perclabely, label= perc_var), size = labelsize, position = position_dodge( width = 0.4) ) +
+            geom_text( data = labeldf, aes_string( x = x_var, y = perclabely, label= perc_var), size = labelsize, position = position_dodge( width = 1) ) +
+            geom_segment( data = summarydftoplot, aes( x = as.numeric(pCHID)-0.4, xend = as.numeric(pCHID)+0.4, y = `lower5perc_log10YL1A`, yend = `lower5perc_log10YL1A` ), linetype = 'dashed' ) +
             scale_fill_manual(values = color_palette) +
             scale_color_manual(values = color_palette) +
             facet_grid(as.formula(facetformula_var), scales = 'free' ) +
             theme_bw(base_size = basesize_var) +
             theme(axis.text.x = element_text(angle = 90)) +
-            # coord_flip() +
+
             ggtitle( title_var )
 
       return(plotout)
