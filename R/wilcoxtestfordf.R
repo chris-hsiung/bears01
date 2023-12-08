@@ -35,7 +35,7 @@ wilcoxtestfordf <- function(dataframe, groupvar1, groupvar2, groupname_var, valu
     pvalue <- format(wilcox.test(groupvar1df[[value_var]], groupvar2df[[value_var]], alternative = alternative_var)$p.value, scientific = sciformat_var, digits = round_var)
   }
 
-  dfout <- data.frame( pvalue = as.numeric(pvalue))
+  dfout <- data.frame( wilcox_pvalue = as.numeric(pvalue))
   return(dfout)
 
  }
