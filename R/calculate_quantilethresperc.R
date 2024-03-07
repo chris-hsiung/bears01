@@ -10,6 +10,7 @@
 #' @param quantilethres_var A character vector specifying the quantile threshold variable (default is '0.05').
 #' @param round_var An integer specifying the number of decimal places to round the percentages (default is 1).
 #` 2023-07-13 fixed bug involving joining thresdf and data
+#' @export
 
 calculate_quantilethresperc <- function(data, group_var, thres_var = 'Spacer', thresname_var = 'NT-3', value_var, quantilethres_var = '0.05', round_var = 1 ) {
 
