@@ -2,6 +2,7 @@
 
 export(RNAfold2df)
 export(assembleCas9DualgRNALibraryOligo)
+export(calculate_quantilethresperc)
 export(clean_name)
 export(copy_to_global)
 export(countBlpI)
