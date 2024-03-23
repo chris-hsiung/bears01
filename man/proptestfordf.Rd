@@ -4,7 +4,14 @@
 \alias{proptestfordf}
 \title{Proportion Test for Two Groups in a DataFrame}
 \usage{
-proptestfordf(data, response_col, group_col, group1_label, group2_label)
+proptestfordf(
+  data,
+  response_col,
+  group_col,
+  group1_label,
+  group2_label,
+  alternative_var = "two-sided"
+)
 }
 \arguments{
 \item{data}{A dataframe containing the data to be tested.}
@@ -34,4 +41,5 @@ result <- proptestfordf(df, 'response', 'group', 'A', 'B')
 print(result)
 }
 
+2024-03-23 added alternative_var
 }
