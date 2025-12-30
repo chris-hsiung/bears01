@@ -21,7 +21,7 @@
 #' print(result)
 #' }
 #'
-#'2024-03-23 added alternative_var
+#'2024-03-23 added alternative_var.
 #' @export
 
 proptestfordf <- function(data, response_col, group_col, group1_label, group2_label, alternative_var = 'two-sided' ){

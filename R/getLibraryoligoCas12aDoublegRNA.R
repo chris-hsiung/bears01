@@ -1,4 +1,5 @@
-#' Function to assemble oligo for pooled synthesis for Cas12a dual gRNA expression. The oligo will consist of: Adaptor5p-BsmbI5p-pos1spacer-DR1-pos2spacer-BsmbI3p-Adaptor3p. DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
+#' Function to assemble oligo for pooled synthesis for Cas12a dual gRNA expression.
+#' 2024-12-28 updated to allow specifying the middle DR as an input argument, which defaults to 19nt WT AsCas12a DR. The oligo will consist of: Adaptor5p-BsmbI5p-pos1spacer-DR-pos2spacer-BsmbI3p-Adaptor3p. Also include input argument to set whether TTTT is allowed.
 #' Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone.  The BsmbI5p and BsmbI3p sites are hard-coded to be compatible with vector backbone containing 5' DR and 3' DR sequences, which are not encoded in the oligo itself (e.g. compatible with vectors designs of pRG212, pCH39, pCH49, etc.).
 #'@param pos1spacer,pos2spacer string containing only spacer DNA sequences of length 19-23nt. Must not contain BsmbI sites. Must not contain TTTT. Must not start with TTT, because the last base of each DR is a T and that would form an undesirable TTTT at the junction.
 #'@param pos1name,pos2name String containing name for each spacer. Defaults to "None".
@@ -14,9 +15,11 @@ getLibraryOligoCas12aDoublegRNA <- function( pos1name = 'None',
                                              pos1spacer,
                                              pos2name = 'None',
                                              pos2spacer,
+                                             DR = 'AATTTCTACTGTCGTAGAT',
                                              Adaptor5p,
                                              Adaptor3p,
-                                             sep = '_'
+                                             sep = '_',
+                                             polyT = 'allowed'
 ){
 
       assertthat::assert_that(
@@ -31,11 +34,16 @@ getLibraryOligoCas12aDoublegRNA <- function( pos1name = 'None',
             warning( 'adaptors are not 18nt long, this is unexpected if using typical PCR adaptors from Weissman lab' )
       }
 
-      DR1 <- 'AATTTCTACTGTCGTAGAT'
-      BsmbI5p <- 'cgtctcAAGAT'
+      if ( !( nchar(DR) >= 19 & nchar(DR) <= 20 ) ){
+            warning( 'DR is not 19-20nt, this is unexpected' )
+
+            assertthat::assert_that( polyT %in% c('allowed', 'excluded'), msg = 'invalid polyT input argument')
+      }
+
+BsmbI5p <- 'cgtctcAAGAT'
       BsmbI3p <- 'AATTcgagacg'
 
-      oligo <- stringr::str_c( Adaptor5p, BsmbI5p, pos1spacer, DR1, pos2spacer, BsmbI3p, Adaptor3p )
+      oligo <- stringr::str_c( Adaptor5p, BsmbI5p, pos1spacer, DR, pos2spacer, BsmbI3p, Adaptor3p )
 
       # assertion to check all inputs are DNA
       oligosequence <- as.character( Biostrings::DNAString( oligo ) )
@@ -44,14 +52,23 @@ getLibraryOligoCas12aDoublegRNA <- function( pos1name = 'None',
       # check for BsmbI sites in oligo
       assertthat::assert_that( bears01::countBsmBI(oligosequence) == 2, msg = paste0( oligoname, ' contains undesirable BsmbI sites') )
 
-      # check "transcript" (oligo minus adaptors) for TTTT
-      transcript <- stringr::str_c( pos1spacer, DR1, pos2spacer)
-
-      assertthat::assert_that( !(grepl('TTTT', transcript)), msg = paste0( oligoname, ' transcribed region contains TTTT' ) )
-
-      # check spacers for starting with TTT, this checks for the case where pos1spacer starts with TTT, which would otherwise be missed
+      ###### check for polyT
+      transcript <- stringr::str_c( pos1spacer, DR, pos2spacer)
       allspacers <- c(pos1spacer, pos2spacer )
-      assertthat::assert_that( !(any( grepl( '^TTT', allspacers) )), msg = paste0( oligoname, ' spacer starts with TTT' ) )
+      if( polyT == 'excluded' ){
+            # check "transcript" (oligo minus adaptors) for TTTT
+            assertthat::assert_that( !(grepl('TTTT', transcript)), msg = paste0( oligoname, ' transcribed region contains TTTT' ) )
+
+            # check spacers for starting with TTT, this checks for the case where pos1spacer starts with TTT, which would otherwise be missed
+            assertthat::assert_that( !(any( grepl( '^TTT', allspacers) )), msg = paste0( oligoname, ' spacer starts with TTT' ) )
+
+      } else if( polyT == 'allowed'){
+            # just produce warning
+
+            if( any( grepl('TTTT', transcript) ) | any( grepl( '^TTT', allspacers) ) ) {
+                  warning( paste0('guide design includes TTTT') )
+            }
+      }
 
       return( list( 'oligosequence' = oligosequence, 'oligoname' = oligoname ) )
 }

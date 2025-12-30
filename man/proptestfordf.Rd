@@ -41,5 +41,5 @@ result <- proptestfordf(df, 'response', 'group', 'A', 'B')
 print(result)
 }
 
-2024-03-23 added alternative_var
+2024-03-23 added alternative_var.
 }

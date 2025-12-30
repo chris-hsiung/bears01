@@ -2,7 +2,8 @@
 % Please edit documentation in R/getLibraryoligoCas12aDoublegRNA.R
 \name{getLibraryOligoCas12aDoublegRNA}
 \alias{getLibraryOligoCas12aDoublegRNA}
-\title{Function to assemble oligo for pooled synthesis for Cas12a dual gRNA expression. The oligo will consist of: Adaptor5p-BsmbI5p-pos1spacer-DR1-pos2spacer-BsmbI3p-Adaptor3p. DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
+\title{Function to assemble oligo for pooled synthesis for Cas12a dual gRNA expression.
+2024-12-28 updated to allow specifying the middle DR as an input argument, which defaults to 19nt WT AsCas12a DR. The oligo will consist of: Adaptor5p-BsmbI5p-pos1spacer-DR-pos2spacer-BsmbI3p-Adaptor3p. Also include input argument to set whether TTTT is allowed.
 Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone.  The BsmbI5p and BsmbI3p sites are hard-coded to be compatible with vector backbone containing 5' DR and 3' DR sequences, which are not encoded in the oligo itself (e.g. compatible with vectors designs of pRG212, pCH39, pCH49, etc.).}
 \usage{
 getLibraryOligoCas12aDoublegRNA(
@@ -10,9 +11,11 @@ getLibraryOligoCas12aDoublegRNA(
   pos1spacer,
   pos2name = "None",
   pos2spacer,
+  DR = "AATTTCTACTGTCGTAGAT",
   Adaptor5p,
   Adaptor3p,
-  sep = "_"
+  sep = "_",
+  polyT = "allowed"
 )
 }
 \arguments{
@@ -29,7 +32,8 @@ The final oligo is checked for undesirable BsmbI sites (in excess of the 2 that 
 A list containing oligoname and oligosequence.
 }
 \description{
-Function to assemble oligo for pooled synthesis for Cas12a dual gRNA expression. The oligo will consist of: Adaptor5p-BsmbI5p-pos1spacer-DR1-pos2spacer-BsmbI3p-Adaptor3p. DR sequences are taken from Deweirdt et al., Nat. Biotech 2020.
+Function to assemble oligo for pooled synthesis for Cas12a dual gRNA expression.
+2024-12-28 updated to allow specifying the middle DR as an input argument, which defaults to 19nt WT AsCas12a DR. The oligo will consist of: Adaptor5p-BsmbI5p-pos1spacer-DR-pos2spacer-BsmbI3p-Adaptor3p. Also include input argument to set whether TTTT is allowed.
 Assumes the oligo will be PCR'd using user-provided adaptor sequences, then digested with BsmbI and ligated into backbone.  The BsmbI5p and BsmbI3p sites are hard-coded to be compatible with vector backbone containing 5' DR and 3' DR sequences, which are not encoded in the oligo itself (e.g. compatible with vectors designs of pRG212, pCH39, pCH49, etc.).
 }
 \examples{
