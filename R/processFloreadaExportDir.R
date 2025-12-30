@@ -81,8 +81,6 @@ processFloreadaExportDir <- function( dir,
 
       filelist <- vector( mode = 'list', length(csvfilenames) )
 
-      dfout <- data.frame()
-
       for ( f in 1:length(csvfilenames) ){
 
             wellIDtemp <- stringr::str_extract( csvfilenames[f], wellIDstring )
@@ -102,7 +100,8 @@ processFloreadaExportDir <- function( dir,
             print( paste0( 'working on ', csvfilenames[f]) )
       }
 
-      dfout <- dplyr::bind_rows( filelist )
+      dfout <- dplyr::bind_rows( filelist ) #note this binds rows even if there are different columns
+
       # check that all annotations have a matching csv file
       if ( !(sum( annodf[[IDvar]] %in% dfout[[IDvar]] ) == length(annodf[[IDvar]]) ) ) {
             message( paste0('these ', IDvar, ' in ', platesetupfile, ' do not match any rows in the combined data: ', toString( annodf[[IDvar]][!(annodf[[IDvar]] %in% dfout[[IDvar]] )] ), '; recommend checking if this is expected' ) )
