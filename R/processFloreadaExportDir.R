@@ -88,7 +88,7 @@ processFloreadaExportDir <- function( dir,
             wellIDtemp <- stringr::str_extract( csvfilenames[f], wellIDstring )
             wellID <- stringr::str_replace( wellIDtemp, csvstring, '')
 
-            df <- fread( file = file.path( dir, csvfilenames[f] )  ) %>%
+            df <- data.table::fread( file = file.path( dir, csvfilenames[f] )  ) %>%
                   dplyr::mutate(
                         filename = csvfilenames[f],
                         !!sym(IDvar) := wellID )
